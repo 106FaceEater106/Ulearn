@@ -11,11 +11,11 @@ namespace func.brainfuck
             var loops = ass(vm.Instructions);
             vm.RegisterCommand('[', b =>
             {
-                var count = b.Memory[b.MemoryPointer];
+                /*var count = b.Memory[b.MemoryPointer];
                 if (count == 0)
-                    b.InstructionPointer = loops.FindIndex();
+                    //b.InstructionPointer = loops.FindIndex();
                 else
-                    x.Push(new MutablePair<int, int>(b.InstructionPointer, count));
+                    x.Push(new MutablePair<int, int>(b.InstructionPointer, count));*/
             });
 
             vm.RegisterCommand(']', b =>

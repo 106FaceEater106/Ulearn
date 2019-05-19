@@ -29,11 +29,10 @@ namespace func.brainfuck
 
         public void Run()
         {
-            while (InstructionPointer < Instructions.Length)
+            for (; InstructionPointer < Instructions.Length; InstructionPointer++)
             {
                 _executes.TryGetValue(Instructions[InstructionPointer], out var execute);
                 execute?.Invoke(this);
-                InstructionPointer++;
             }
         }
     }
