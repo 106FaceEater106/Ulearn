@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -12,15 +13,15 @@ namespace func_rocket
 		/// </summary>
 		public static RocketForce GetThrustForce(double forceValue)
         {
-			return r => new Vector(forceValue, forceValue);
-		}
+			return r => new Vector(forceValue*Math.Cos(r.Direction),forceValue*Math.Sin(r.Direction));
+        }
 
         /// <summary>
         /// Преобразует делегат силы гравитации, в делегат силы, действующей на ракету
         /// </summary>
         public static RocketForce ConvertGravityToForce(Gravity gravity, Size spaceSize)
         {
-            return r => Vector.Zero;
+            return r => gravity(spaceSize, r.Location);
 
         }
 
@@ -29,7 +30,8 @@ namespace func_rocket
 		/// </summary>
 		public static RocketForce Sum(params RocketForce[] forces)
         {
-            return forces[0];
+            
+            return forces[0]+forces[1];
         }
 	}
 }

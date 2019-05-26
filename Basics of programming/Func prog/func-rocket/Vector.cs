@@ -73,12 +73,12 @@ namespace func_rocket
 			return Length > 0 ? this*(1/Length) : this;
 		}
 
-		public Vector Rotate(double angle)
-		{
-			return new Vector(X*Math.Cos(angle) - Y*Math.Sin(angle), X*Math.Sin(angle) + Y*Math.Cos(angle));
-		}
+        public Vector Rotate(double angle)
+        {
+            return new Vector(X * Math.Cos(angle) - Y * Math.Sin(angle), X * Math.Sin(angle) + Y * Math.Cos(angle));
+        }
 
-		public Vector BoundTo(Size size)
+        public Vector BoundTo(Size size)
 		{
 			return new Vector(Math.Max(0, Math.Min(size.Width, X)), Math.Max(0, Math.Min(size.Height, Y)));
 		}
