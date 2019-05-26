@@ -5,15 +5,15 @@ using System.Runtime.CompilerServices;
 
 namespace func_rocket
 {
-	public class ForcesTask
-	{
-		/// <summary>
-		/// Создает делегат, возвращающий по ракете вектор силы тяги двигателей этой ракеты.
-		/// Сила тяги направлена вдоль ракеты и равна по модулю forceValue.
-		/// </summary>
-		public static RocketForce GetThrustForce(double forceValue)
+    public class ForcesTask
+    {
+        /// <summary>
+        /// Создает делегат, возвращающий по ракете вектор силы тяги двигателей этой ракеты.
+        /// Сила тяги направлена вдоль ракеты и равна по модулю forceValue.
+        /// </summary>
+        public static RocketForce GetThrustForce(double forceValue)
         {
-			return r => new Vector(forceValue*Math.Cos(r.Direction),forceValue*Math.Sin(r.Direction));
+            return r => new Vector(forceValue * Math.Cos(r.Direction), forceValue * Math.Sin(r.Direction));
         }
 
         /// <summary>
@@ -22,16 +22,17 @@ namespace func_rocket
         public static RocketForce ConvertGravityToForce(Gravity gravity, Size spaceSize)
         {
             return r => gravity(spaceSize, r.Location);
-
         }
 
         /// <summary>
-		/// Суммирует все переданные силы, действующие на ракету, и возвращает суммарную силу.
-		/// </summary>
-		public static RocketForce Sum(params RocketForce[] forces)
+        /// Суммирует все переданные силы, действующие на ракету, и возвращает суммарную силу.
+        /// </summary>
+        public static RocketForce Sum(params RocketForce[] forces)
         {
-            
-            return forces[0]+forces[1];
+            /*var current = Vector.Zero;
+            return r=>forces.Aggregate((item) => item(r) + current);*/
+
+            return r=>forces.Aggregate(Vector.Zero, (current, item) => current + item(r));
         }
-	}
+    }
 }
