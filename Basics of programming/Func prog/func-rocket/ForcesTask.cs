@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
+
 
 namespace func_rocket
 {
@@ -29,9 +29,6 @@ namespace func_rocket
         /// </summary>
         public static RocketForce Sum(params RocketForce[] forces)
         {
-            /*var current = Vector.Zero;
-            return r=>forces.Aggregate((item) => item(r) + current);*/
-
             return r=>forces.Aggregate(Vector.Zero, (current, item) => current + item(r));
         }
     }
