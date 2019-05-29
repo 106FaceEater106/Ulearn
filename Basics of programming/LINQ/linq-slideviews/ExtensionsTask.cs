@@ -16,13 +16,13 @@ namespace linq_slideviews
         public static double Median(this IEnumerable<double> items)
         {
             var enumerable = items.OrderBy(x => x).ToList();
-            if (!enumerable.Any()) throw new InvalidOperationException();
-
-            var amount = enumerable.Count();
+            var amount = enumerable.Count;
+             
+            if (amount == 0) throw new InvalidOperationException();
 
             var result = amount % 2 != 0
-                ? enumerable.ElementAt(amount / 2)
-                : (enumerable.ElementAt(amount / 2) + enumerable.ElementAt(amount / 2 - 1)) / 2.0;
+                ? enumerable[amount / 2]
+                : (enumerable[amount / 2] + enumerable[amount / 2 - 1]) / 2.0;
             return result;
         }
 
@@ -33,7 +33,7 @@ namespace linq_slideviews
         public static IEnumerable<Tuple<T, T>> Bigrams<T>(this IEnumerable<T> items)
         {
             var isFirst = true;
-            T prev = default(T);
+            var prev = default(T);
             foreach (var item in items)
             {
                 if (!isFirst) yield return new Tuple<T, T>(prev, item);
