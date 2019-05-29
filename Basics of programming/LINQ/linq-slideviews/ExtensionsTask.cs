@@ -18,7 +18,7 @@ namespace linq_slideviews
             var enumerable = items.OrderBy(x => x).ToList();
             var amount = enumerable.Count;
              
-            if (amount == 0) throw new InvalidOperationException();
+            if (amount == 0) throw new InvalidOperationException("Source is empty");
 
             var result = amount % 2 != 0
                 ? enumerable[amount / 2]
